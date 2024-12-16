@@ -18,12 +18,13 @@ client.on('message', async (channel, message) => {
     await client.hSet('values', message, fibonacci(parseInt(message)))
 });
 
-subscriber.subscribe('insert')
-// subscriber.subscribe('insert', async (message, ch) => {
-//     console.log(`message received from channel: ${ch} is :`, message)
-//     await client.hSet('values', message, fibonacci(parseInt(message)))
-// })
+// subscriber.subscribe('insert')
+subscriber.subscribe('insert', async (message, ch) => {
+    console.log(`message received from channel: ${ch} is :`, message)
+    await client.hSet('values', message, fibonacci(parseInt(message)))
+})
 
 module.exports = {
-    client
+    client,
+    subscriber
 }

@@ -5,11 +5,13 @@ dotenv.config({
     path: path.resolve(__dirname, "../.env")
 });
 
-const {client} = require("./redis");
+const {client, subscriber} = require("./redis");
 
 async function connectRedis(){
     try{
         await client.connect();
+        await subscriber.connect();
+
         console.log("connected to redis")
     }
     catch(err){
